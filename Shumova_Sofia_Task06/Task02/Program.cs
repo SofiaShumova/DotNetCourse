@@ -18,11 +18,11 @@ namespace Task02
             }
             set
             {
-                AssignValueRadius(value, out radiusRound);
+                radiusRound = AssignValueRadius(value);
             }
         }
 
-        public double GetArea(double radius)
+        public static double GetArea(double radius)
         {
             return Math.PI * Math.Pow(radius, 2);
         }
@@ -35,7 +35,7 @@ namespace Task02
         {
             return 2 * Math.PI * RadiusRound;
         }
-        public double GetCircuit(double radius)
+        public static double GetCircuit(double radius)
         {
             return 2 * Math.PI * radius;
         }
@@ -44,7 +44,7 @@ namespace Task02
         {
             CenterX = absсissa;
             CenterY = ordinate;
-            AssignValueRadius(rad, out radiusRound);
+            radiusRound = AssignValueRadius(rad);
 
         }
 
@@ -55,16 +55,15 @@ namespace Task02
             RadiusRound = 0;
         }
 
-        private void AssignValueRadius(double inputValue, out double outputValue)
+        protected double AssignValueRadius(double inputValue)
         {
             if (inputValue > 0)
             {
-                outputValue = inputValue;
+                return inputValue;
             }
-            else
-            {
-                throw new Exception("Некорректное значение радиуса!");
-            }
+
+            throw new Exception("Некорректное значение радиуса!");
+
         }
 
         public override string ToString() // винтерполяция строк, форматирование строк, округление
@@ -81,16 +80,16 @@ namespace Task02
     class Ring : Round
     {
         double externalRadius, internalRadius;
-
+        private Round innerRound;
         public double ExternalRadius
         {
             get
             {
-                return externalRadius;
+                return RadiusRound;
             }
             set
             {
-                AssignValueExternalRadius(value, out externalRadius);
+                RadiusRound = AssignValueRadius(value);
             }
         }
         public double InternalRadius
@@ -101,50 +100,37 @@ namespace Task02
             }
             set
             {
-                AssignValueInternalRadius(value, out internalRadius);
+                internalRadius = AssignValueInternalRadius(value);
             }
         }
 
-        private void AssignValueExternalRadius(double inputValue, out double outputValue)
-        {
-            if (inputValue > RadiusRound)
-            {
-                outputValue = inputValue;
-            }
-            else
-            {
-                throw new Exception("Некорректное значение!");
-            }
-        }
-        private void AssignValueInternalRadius(double inputValue, out double outputValue)
+        private double AssignValueInternalRadius(double inputValue)
         {
             if (inputValue < RadiusRound && inputValue > 0)
             {
-                outputValue = inputValue;
+                return inputValue;
             }
-            else
-            {
-                throw new Exception("Некорректное значение!");
-            }
+
+            throw new Exception("Некорректное значение!");
         }
 
-        public Ring(double absсissa, double ordinate, double rad, double externalRad,
+        public Ring(double absсissa, double ordinate, double rad,
             double internalRad) : base(absсissa, ordinate, rad)
         {
-            AssignValueExternalRadius(externalRad, out externalRadius);
-            AssignValueInternalRadius(internalRad, out internalRadius);
+            externalRadius = RadiusRound;
+            internalRadius = AssignValueInternalRadius(internalRad);
         }
 
-        public Ring(Round round, double externalRad, double internalRad) :
+        public Ring(Round round, double internalRad) :
             base(round.CenterX, round.CenterY, round.RadiusRound)
         {
-            AssignValueExternalRadius(externalRad, out externalRadius);
-            AssignValueInternalRadius(internalRad, out internalRadius);
+            externalRadius = RadiusRound;
+            internalRadius = AssignValueInternalRadius(internalRad);
         }
 
         public double GetAreaRing()
         {
-            return GetArea(ExternalRadius) - GetArea(InternalRadius);
+            return  GetArea() - GetArea(InternalRadius);
 
         }
 
@@ -155,7 +141,7 @@ namespace Task02
 
         public string GetRingsInfo()
         {
-            return $"\nВнешний радиус: {ExternalRadius} \nВнутренний радиус: {InternalRadius} " +
+            return $"\nВнешний радиус: {RadiusRound} \nВнутренний радиус: {InternalRadius} " +
                 $"\nСумма окружностей: {GetAreaRing()} \nПлощадь кольца: {GetSumCircuitRing()}";
 
         }
@@ -172,28 +158,36 @@ namespace Task02
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Введите данные круга.");
-            Round round = new Round(ParseNumber("абсциссу"), ParseNumber("ординату"), ParseNumber("радиус"));
+            try
+            {
+                Console.WriteLine("Введите данные круга.");
+                Round round = new Round(ParseNumber("абсциссу"), ParseNumber("ординату"), ParseNumber("радиус"));
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            Console.WriteLine("Данные о круге:");
-            round.ToString();
+                Console.WriteLine("Данные о круге:");
+                Console.WriteLine(round);
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            Console.WriteLine("Введите данные кольца.");
-            Ring ring = new Ring(round, ParseNumber("внешний радиус"), ParseNumber("внутренний радиус"));
+                Console.WriteLine("Введите данные кольца.");
+                Ring ring = new Ring(round,ParseNumber("внутренний радиус"));
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            Console.WriteLine("Информация о кольце");
-            Console.WriteLine(ring.GetRingsInfo());
+                Console.WriteLine("Информация о кольце");
+                Console.WriteLine(ring.GetRingsInfo());
 
-            Console.WriteLine();
+                Console.WriteLine();
 
-            Console.WriteLine("Полная информация");
-            Console.WriteLine(ring.GetFullInfo());
+                Console.WriteLine("Полная информация");
+                Console.WriteLine(ring.GetFullInfo());
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         public static double ParseNumber(string nameInfo)

@@ -22,7 +22,7 @@ namespace Task01
             }
             set
             {
-                AssignValueDateBirthday(value, out dateBirth);
+                dateBirth = AssignValueDateBirthday(value);
             }
         } // написать исключение на дату в сет
         public int Age
@@ -47,21 +47,20 @@ namespace Task01
             LastName = name;
             FirstName = surname;
             Patronymic = patr;
-            AssignValueDateBirthday(datebirthday, out dateBirth);
+            dateBirth = AssignValueDateBirthday(datebirthday);
         }
 
         public User() { }
 
-        private void AssignValueDateBirthday(DateTime inputValueDate, out DateTime valueDate)
+        private DateTime AssignValueDateBirthday(DateTime inputValueDate)
         {
             if (inputValueDate < DateTime.Now)
             {
-                valueDate = inputValueDate;
+                return inputValueDate;
             }
-            else
-            {
+           
                 throw new Exception("Некорректная дата!");
-            }
+           
 
         }
 
@@ -89,14 +88,14 @@ namespace Task01
             }
             set
             {
-                AssignValueExperience(value, out workExperience);
+                workExperience = AssignValueExperience(value);
             }
         }
 
         public Employee(string name, string surname, string patr, DateTime datebirthday,
             string positionEmployee, int experienceEmployee) : base(name, surname, patr, datebirthday)
         {
-            AssignValueExperience(experienceEmployee, out workExperience);
+            workExperience = AssignValueExperience(experienceEmployee);
             WorkPost = positionEmployee;
             
         }
@@ -104,51 +103,40 @@ namespace Task01
         public Employee( User user, string positionEmployee, int experienceEmployee) :
             base(user.FirstName, user.LastName, user.Patronymic, user.DateBirth)
         {
-            AssignValueExperience(experienceEmployee, out workExperience);
+            workExperience = AssignValueExperience(experienceEmployee);
             WorkPost = positionEmployee;      
         }
 
 
-        public Employee() : base()
+        public Employee() : base(){}
+
+        private bool ValidWorkExperience(int expirence)
         {
-            WorkPost = "";
-            WorkExperience = 0;
+            return (expirence < Age);
         }
 
-        private bool ConditionValidWorkExperience(int expirence)
+        private int AssignValueExperience(int inputValueExperience)
         {
-            if (expirence > Age)
+            if (ValidWorkExperience(inputValueExperience))
             {
-                return false;
+                return inputValueExperience;
             }
-            return true;
-        }
-
-        private void AssignValueExperience(int inputValueExperience, out int valueExperience)
-        {
-            if (ConditionValidWorkExperience(inputValueExperience))
-            {
-                valueExperience = inputValueExperience;
-            }
-            else
-            {
+            
                 throw new Exception("Некорректное значение!");
-            }
-
         }
        
 
         public string GetEmloyeesInfo()
         {
 
-            return $"\nДолжность: {WorkPost}\nСтаж работы: {workExperience} лет";
+            return $"Должность: {WorkPost}\nСтаж работы: {workExperience} лет";
         }
 
 
         public string GetFullInfo()
         {
             
-            return ToString()+ $"\nДолжность: {WorkPost}\nСтаж работы: {workExperience} лет";
+            return ToString()+ GetEmloyeesInfo();
         }        
     }
 
@@ -157,18 +145,26 @@ namespace Task01
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Пользователь.");
-            User firstUser = new User(GetInfo("фамилию"), GetInfo("имя"), GetInfo("отчество"), ParseDate("дату рождения"));
-            Console.WriteLine();
-            Employee firstEmployee = new Employee(firstUser, GetInfo("должность"), ParseNumberValid("опыт работы"));
+            try
+            {
+                Console.WriteLine("Пользователь.");
+                User firstUser = new User(GetInfo("фамилию"), GetInfo("имя"), GetInfo("отчество"), ParseDate("дату рождения"));
+                Console.WriteLine();
+                Employee firstEmployee = new Employee(firstUser, GetInfo("должность"), ParseNumberValid("опыт работы"));
 
-            Console.WriteLine();
-            Console.WriteLine("Пользователь:");
-            Console.Write(firstUser.ToString());
+                Console.WriteLine();
+                Console.WriteLine("Пользователь:");
+                Console.Write(firstUser.);
 
-            Console.WriteLine();
-            Console.WriteLine("Сотрудник:");
-            Console.Write(firstEmployee.GetEmloyeesInfo());
+                Console.WriteLine();
+                Console.WriteLine("Сотрудник:");
+                Console.Write(firstEmployee.GetEmloyeesInfo());
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
         public static string GetInfo(string nameInfo)
