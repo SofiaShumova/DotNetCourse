@@ -1,0 +1,51 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task01", "Task01\Task01.csproj", "{76C0D281-258D-4068-BF60-B886621FF5F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task02", "Task02\Task02.csproj", "{A666E1F9-C5AA-4B2B-BE5D-D518C280B162}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task03", "Task03\Task03.csproj", "{6EF257F0-CAD9-4D48-B3FF-9A717439A2AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Task04", "Task04\Task04.csproj", "{D2600FBC-90F0-4ED5-AAFC-A92B0C94F982}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|anycpu = Debug|anycpu
+		Release|anycpu = Release|anycpu
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{76C0D281-258D-4068-BF60-B886621FF5F6}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{76C0D281-258D-4068-BF60-B886621FF5F6}.Debug|anycpu.Build.0 = Debug|anycpu
+		{76C0D281-258D-4068-BF60-B886621FF5F6}.Release|anycpu.ActiveCfg = Release|anycpu
+		{76C0D281-258D-4068-BF60-B886621FF5F6}.Release|anycpu.Build.0 = Release|anycpu
+		{A666E1F9-C5AA-4B2B-BE5D-D518C280B162}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{A666E1F9-C5AA-4B2B-BE5D-D518C280B162}.Debug|anycpu.Build.0 = Debug|anycpu
+		{A666E1F9-C5AA-4B2B-BE5D-D518C280B162}.Release|anycpu.ActiveCfg = Release|anycpu
+		{A666E1F9-C5AA-4B2B-BE5D-D518C280B162}.Release|anycpu.Build.0 = Release|anycpu
+		{6EF257F0-CAD9-4D48-B3FF-9A717439A2AF}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{6EF257F0-CAD9-4D48-B3FF-9A717439A2AF}.Debug|anycpu.Build.0 = Debug|anycpu
+		{6EF257F0-CAD9-4D48-B3FF-9A717439A2AF}.Release|anycpu.ActiveCfg = Release|anycpu
+		{6EF257F0-CAD9-4D48-B3FF-9A717439A2AF}.Release|anycpu.Build.0 = Release|anycpu
+		{D2600FBC-90F0-4ED5-AAFC-A92B0C94F982}.Debug|anycpu.ActiveCfg = Debug|anycpu
+		{D2600FBC-90F0-4ED5-AAFC-A92B0C94F982}.Debug|anycpu.Build.0 = Debug|anycpu
+		{D2600FBC-90F0-4ED5-AAFC-A92B0C94F982}.Release|anycpu.ActiveCfg = Release|anycpu
+		{D2600FBC-90F0-4ED5-AAFC-A92B0C94F982}.Release|anycpu.Build.0 = Release|anycpu
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.DotNetNamingPolicy = $1
+		$1.DirectoryNamespaceAssociation = PrefixedHierarchical
+		$0.TextStylePolicy = $2
+		$2.inheritsSet = null
+		$2.scope = text/x-csharp
+		$0.CSharpFormattingPolicy = $3
+		$3.scope = text/x-csharp
+		$0.TextStylePolicy = $4
+		$4.FileWidth = 80
+		$4.TabsToSpaces = True
+		$4.scope = text/plain
+		$0.StandardHeader = $5
+		$0.VersionControlPolicy = $6
+	EndGlobalSection
+EndGlobal
