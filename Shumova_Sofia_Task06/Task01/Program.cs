@@ -154,7 +154,7 @@ namespace Task01
 
                 Console.WriteLine();
                 Console.WriteLine("Пользователь:");
-                Console.Write(firstUser.);
+                Console.Write(firstUser);
 
                 Console.WriteLine();
                 Console.WriteLine("Сотрудник:");

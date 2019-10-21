@@ -186,7 +186,8 @@ namespace Task01
     {
         public static void Main(string[] args)
         {
-            Console.WriteLine("Graphics editor");
+            
+            Console.WriteLine("Graphics ediорповпроtor");
 
             int point = 0, point1 = 1, radius = 5;
 
