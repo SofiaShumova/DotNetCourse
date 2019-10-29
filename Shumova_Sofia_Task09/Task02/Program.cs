@@ -1,11 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace Task01
 {
-    class DynamicArray<T>
+    class DynamicArray<T> : IEnumerable
     {
         public T[] array;
 
+        int currentIndex;
         int length;
         public int Capacity
         {
@@ -23,7 +26,7 @@ namespace Task01
             }
             private set
             {
-                if (value > 0 && value <= Capacity)
+                if (value >=0 && value <= Capacity)
                 {
                     length = value;
                 }
@@ -37,7 +40,26 @@ namespace Task01
         public DynamicArray(int count)
         {
             array = new T[count];
-            Length = count;
+            Length = 0;
+        }
+
+        public DynamicArray(IEnumerable mas)
+        {
+            int count = 0;
+            IEnumerator ie = mas.GetEnumerator();
+            while (ie.MoveNext())
+            {
+                count++;
+            }
+            ie.Reset();
+            array = new T[count];
+            Length = 0;
+            while (ie.MoveNext())
+            {
+              array[Length] = (T)ie.Current;
+              Length++;
+            }
+            Reset();
         }
 
         public DynamicArray()
@@ -58,7 +80,7 @@ namespace Task01
             }
         }
 
-        private void Resize(int newSize) // увеличивать до степени двойки 
+        private void Resize(int newSize) 
         {
 
             if (newSize >= Capacity)
@@ -74,7 +96,6 @@ namespace Task01
 
 
         }
-
         public void Add(T element)
         {
 
@@ -84,7 +105,6 @@ namespace Task01
             array[Length] = element;
             Length++;
         }
-
         public void AddRange(T[] mas)
         {
             Resize(Length + mas.Length);
@@ -95,7 +115,6 @@ namespace Task01
             Length += mas.Length;
 
         }
-
         public bool Remove(T element)
         {
             for (int i = 0; i < Length; i++)
@@ -112,7 +131,6 @@ namespace Task01
             }
             return false;
         }
-
         public void Insert(int index, T element)
         {
             if (index >= Length)
@@ -130,7 +148,6 @@ namespace Task01
             Length++;
 
         }
-
         public T GetElement(int index)
         {
             return array[index];
@@ -162,6 +179,27 @@ namespace Task01
 
             }
         }
+        public IEnumerator GetEnumerator()
+        {
+            return array.GetEnumerator();
+        }
+        public bool MoveNext()
+        {
+            currentIndex++;
+            return currentIndex < Length; //&& currentIndex>=0);
+          
+        }
+        public object Current
+        {
+            get
+            {
+                return array[currentIndex];
+            }
+        }
+        public void Reset()
+        {
+            currentIndex = -1;
+        }
     }
 
 
@@ -171,24 +209,17 @@ namespace Task01
         {
             try
             {
-                Console.WriteLine("Dynamic array.");
-                int[] arr = { 0, 4, 5 };
-                DynamicArray<int> test = new DynamicArray<int>(arr);
-                Console.WriteLine($"Length = {test.Length} Capasity = {test.Capacity}");
+                Console.WriteLine("Dynamic array. IEmunerable");
+                int[] arr = { 0, 4, 5, 6, 9 };
 
-                test.Add(12);
-                Console.WriteLine($"Length = {test.Length} Capasity = {test.Capacity}");
-                //test.AddRange(arr);
-                Console.WriteLine(test[2].ToString());
-                //test.Remove(4);
-                //test.Remove(4);
-                //test.Insert(20, 6);
-                for (int i = 0; i < test.Length; i++)
+                IEnumerable  ie = arr;
+                
+                DynamicArray<int> dynamic = new DynamicArray<int>(ie);
+               
+                while (dynamic.MoveNext())
                 {
-
-                    Console.Write($" {test.GetElement(i)}, ");
+                    Console.Write($"{dynamic.Current}, ");
                 }
-                Console.WriteLine($"Length = {test.Length} Capasity = {test.Capacity}");
 
             }
             catch (Exception ex)
