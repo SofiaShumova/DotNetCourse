@@ -53,7 +53,7 @@ namespace Task03
             {
                 Console.Write($"\n{arrayWord[i]} - repeat {wordsCount[i]} ");
             }
-
+            Console.ReadKey();
         }
     }
 }
