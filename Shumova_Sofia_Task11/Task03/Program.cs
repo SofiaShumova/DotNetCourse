@@ -50,7 +50,10 @@ namespace Task03
 
         public override int GetHashCode()
         {
-            return x ^ y; // ^ выполняет операцию логического исключающего XOR побитно
+            int hash = 15;
+
+            return ((hash * 7) + x) ^ ((hash * 7) + y);
+            //return x ^ y; // ^ выполняет операцию логического исключающего XOR побитно
 
             // в чем тут проблема?
         }

@@ -139,17 +139,17 @@ namespace Task02
             {
                 return false;
             }
-            return employee.WorkPost == WorkPost && employee.WorkExperience == WorkExperience;
+            return employee.WorkPost == WorkPost && employee.WorkExperience == WorkExperience; // 
         }
 
 
         public override string ToString()
         {
-            return $"Должность: {WorkPost}\nСтаж работы: {workExperience} лет"; ;
+            return $"\nДолжность: {WorkPost}\nСтаж работы: {workExperience} лет"; ;
         }
         public override int GetHashCode()
         {
-            return WorkPost.GetHashCode ^ WorkExperience;
+            return WorkPost.GetHashCode() ^ WorkExperience.GetHashCode()^ base.GetHashCode();
            // return base.GetHashCode();
         }
     }
@@ -160,22 +160,38 @@ namespace Task02
             try
             {
                 Console.WriteLine("Пользователь.");
-                User firstUser = new User(GetInfo("фамилию"), GetInfo("имя"), GetInfo("отчество"), ParseDate("дату рождения"));
+                User firstUser = new User("Новиков", "Игорь", "Олегович", new DateTime(1988, 12, 4));
+                Employee firstEmployee = new Employee(firstUser, "Служащий", 2);
+
+               
+                Employee secondEmployee = new Employee(firstUser, "Служащий", 2);
+
+                Console.WriteLine("ToString:");
+
+                Console.WriteLine("first user:");
+                Console.WriteLine(firstEmployee.Info());
+               
                 Console.WriteLine();
-                Employee firstEmployee = new Employee(firstUser, GetInfo("должность"), GetNumber("опыт работы"));
+
+                Console.WriteLine("second user:");
+                Console.WriteLine(secondEmployee.Info());
+             
+                Console.WriteLine();
+
+                Console.WriteLine("Equals:");
+                Console.WriteLine(firstUser.Equals(secondEmployee).ToString());
 
                 Console.WriteLine();
-                Console.WriteLine("Пользователь:");
-                Console.Write(firstUser);
 
-                Console.WriteLine();
-                Console.WriteLine("Сотрудник:");
-                Console.Write(firstEmployee.Info());
+                Console.WriteLine("GetHashCode:");
+                Console.WriteLine($"first: {firstEmployee.GetHashCode()}  second: {secondEmployee.GetHashCode()}");
+
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
+            Console.ReadKey();
 
         }
 
