@@ -257,8 +257,10 @@ namespace Task02
         {
             //CopyFileAndCreateDirectory(old, DateTime.Now);
             Console.WriteLine($"{old.FullName} заменяется {nw.FullName}");
-           // File.Copy(nw.FullName, old.FullName, true);
-           // File.Replace(nw.FullName, old.FullName, null, true);
+            // File.Copy(nw.FullName, old.FullName, true);
+            CopyFileAndCreateDirectory(old, old.LastWriteTime);
+            File.Replace(nw.FullName, old.FullName, null, true);
+            CopyFileAndCreateDirectory(old, DateTime.Now);
             // null, true);
         }
         private int GetValue(int max)
