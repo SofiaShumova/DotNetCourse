@@ -21,14 +21,14 @@ namespace Department.BLL
         private void InitList()
         {
             people.AddPerson("Sofia", "Shumova", new DateTime(1999,11,24));
-            people.AddPerson("John", "Klon", new DateTime(2003,7,2));
-            people.AddPerson("Lucy", "Klukina", new DateTime(2008,5,3));
-            people.AddPerson("Will", "Baies", new DateTime(2001,6,9));
+            people.AddPerson("John", "Klon", new DateTime(2003, 7, 2));
+            people.AddPerson("Lucy", "Klukina", new DateTime(2008, 5, 3));
+            people.AddPerson("Will", "Baies", new DateTime(2001, 6, 9));
 
             //return people.ListPersons;
         }
 
-        public List<Person>People
+        public IEnumerable<Person>People
         {
             get
             {
@@ -56,11 +56,11 @@ namespace Department.BLL
             people.AddAwardPerson(award, person);
         }
 
-        public List<Award> AwardsPerson(Person person)
+        public IEnumerable<Award> AwardsPerson(Person person)
         {
             return people[people.ListPersons.FindIndex(item => item == person)].GetAwards();
         }
-        public List<Award> AwardsPerson(int IDPerson)
+        public IEnumerable<Award> AwardsPerson(int IDPerson)
         {
             return people[people.ListPersons.FindIndex(item => item.ID == IDPerson)].GetAwards();
         }

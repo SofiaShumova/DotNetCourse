@@ -1,0 +1,48 @@
+body{
+	background-color: #FFFFE0;
+
+	text-align: center;
+	font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+	
+}
+#header{
+	letter-spacing: 5px;
+	font-weight: 400;
+}
+caption{
+	letter-spacing: 5px;
+}
+table {
+    width: 60%; /* Ширина таблицы */
+    border: 4px solid #006064; /* Граница вокруг таблицы */
+    border-spacing: 10px ; /* Расстояние между границ */
+	text-align: center;
+	margin: auto;
+	margin-bottom: 20px;
+	/*border-left: 40px;*/
+} 
+td {
+    /* Цвет фона */
+    border-right: collapse;
+    border: 1px solid #333; /* Граница вокруг ячеек */
+    padding: 5px; /* Поля в ячейках */ 
+}
+#headertable{
+	background:#5DC8CD;
+
+}
+tr{
+	 background: #FFB473;
+}
+button{
+	
+	background: #5DC8CD;
+	margin: auto;
+    display: block;
+    outline: none;
+    height: 50px;
+    width: 24%;
+    font-size: 20px;
+    border:none;
+	
+}

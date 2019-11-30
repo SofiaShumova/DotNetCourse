@@ -96,7 +96,7 @@
             this.gridPeople.RowHeadersVisible = false;
             this.gridPeople.RowHeadersWidth = 72;
             this.gridPeople.RowTemplate.Height = 31;
-            this.gridPeople.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gridPeople.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridPeople.Size = new System.Drawing.Size(739, 432);
             this.gridPeople.TabIndex = 0;
             this.gridPeople.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridPeople_CellClick);
@@ -128,7 +128,7 @@
             this.gridAwards.RowHeadersVisible = false;
             this.gridAwards.RowHeadersWidth = 72;
             this.gridAwards.RowTemplate.Height = 31;
-            this.gridAwards.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.gridAwards.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.gridAwards.Size = new System.Drawing.Size(765, 432);
             this.gridAwards.TabIndex = 1;
             // 
@@ -158,21 +158,21 @@
             // добавитьToolStripMenuItem
             // 
             this.добавитьToolStripMenuItem.Name = "добавитьToolStripMenuItem";
-            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.добавитьToolStripMenuItem.Size = new System.Drawing.Size(175, 40);
             this.добавитьToolStripMenuItem.Text = "Add ";
             this.добавитьToolStripMenuItem.Click += new System.EventHandler(this.AddToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(175, 40);
             this.editToolStripMenuItem.Text = "Edit";
             this.editToolStripMenuItem.Click += new System.EventHandler(this.editToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
-            this.выходToolStripMenuItem.Size = new System.Drawing.Size(315, 40);
+            this.выходToolStripMenuItem.Size = new System.Drawing.Size(175, 40);
             this.выходToolStripMenuItem.Text = "Exit";
             this.выходToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 

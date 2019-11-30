@@ -7,20 +7,20 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Department.BLL;
+using Department.DAL;
 using Entities;
 
-//диалог подтверждения перед удалением
 
-//удаление наград
+// запросы на получение коллекции
+
+
 
 namespace Task01
 {
-    
-
     public partial class MainForm : Form
     {
-        PersonsBL people = new PersonsBL();
-        AwardsBL awards = new AwardsBL();
+        PersonsBL people = new PersonsBL(new PersonsSqlDAO());
+        AwardsBL awards = new AwardsBL(new AwardsSqlDAO());
         public MainForm()
         {
             InitializeComponent();
@@ -28,6 +28,10 @@ namespace Task01
 
         private void MainForm_Load(object sender, EventArgs e)
         {
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "personAwardDataSet2.Award". При необходимости она может быть перемещена или удалена.
+            //this.awardTableAdapter.Fill(this.personAwardDataSet2.Award);
+            // TODO: данная строка кода позволяет загрузить данные в таблицу "personAwardDataSet1.Person". При необходимости она может быть перемещена или удалена.
+            //this.personTableAdapter.Fill(this.personAwardDataSet1.Person);
             SizeComponents(sender, e);
             ClientSizeChanged += SizeComponents;
 
@@ -61,7 +65,7 @@ namespace Task01
         {
             if (tcFullInfo.SelectedIndex == 0)
             {
-                AddForm form = new AddForm(true, awards.Awards);
+                AddForm form = new AddForm(true, awards.Awards.ToList());
                 form.ShowDialog();
                 if (form.User != null)
                 {
@@ -72,7 +76,7 @@ namespace Task01
             }
             else if (tcFullInfo.SelectedIndex == 1)
             {
-                AddForm form = new AddForm(false, awards.Awards);
+                AddForm form = new AddForm(false, awards.Awards.ToList());
                 form.ShowDialog();
                 if (form.Award != null)
                 {
@@ -85,14 +89,15 @@ namespace Task01
         private void gridPeople_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             tbAwardsInfo.Clear();
-            
-            
+
+
             string fullAwards = "";
             if (!(e.RowIndex < 0))
             {
                 int ID = Convert.ToInt32(gridPeople[0, e.RowIndex].Value);
                 Person person = people.GetPerson(ID);
-                foreach (Award i in person.GetAwards())
+
+                foreach (Award i in people.AwardsPerson(person))
                 {
                     fullAwards += $"\r\n{i.Name}";
                 }
@@ -104,7 +109,7 @@ namespace Task01
         }
         private void UpdateData()
         {
-            gridPeople.DataSource = people.People.ToTable();
+            gridPeople.DataSource =people.People.ToList().ToTable();
             gridAwards.DataSource = awards.Awards.ToTable();
             if (gridPeople.RowCount > 0)
             {
@@ -123,7 +128,7 @@ namespace Task01
                 
                 int ID = int.Parse(gridPeople[0, gridPeople.SelectedCells[0].RowIndex].Value.ToString());
                 Person person = people.GetPerson(ID);
-                AddForm form = new AddForm(person, awards.Awards);
+                AddForm form = new AddForm(person, awards.Awards.ToList());
                 form.ShowDialog();
 
 

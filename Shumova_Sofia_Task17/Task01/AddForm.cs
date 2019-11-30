@@ -83,7 +83,7 @@ namespace Task01
 
             tbName.Text = award.Name;
             tbDescription.Text = award.Description;
-
+            btDeleteAward.Visible = true;
         }
 
         private void StartPersonEdit(Person person)
