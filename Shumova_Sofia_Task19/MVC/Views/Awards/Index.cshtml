@@ -1,0 +1,36 @@
+﻿@using Entities;
+@model ICollection<Award>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Awards</h2>
+<table class="table_blur" style="margin: auto;">
+    <tr id="headertable">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Description</th>
+        
+        <th>Action</th>
+    </tr>
+    @{
+     
+        foreach (Award award in Model)
+        {
+            <tr>
+                <td>@award.ID.ToString()</td>
+                <td>@award.Name</td>
+                <td>@award.Description</td>
+                
+                <td>
+                   @Html.ActionLink("Delete", "Delete",new {id = award.ID})
+                   @Html.ActionLink("Edit", "Edit", new { ID = award.ID, Name=award.ID, Description = award.Description })
+                </td>
+
+            </tr>
+        }
+    }
+
+</table>
+<button id="butcreate">@Html.ActionLink("Create award", "Add", "Awards")</button>

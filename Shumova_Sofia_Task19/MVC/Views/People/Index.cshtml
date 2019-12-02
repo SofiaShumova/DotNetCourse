@@ -1,0 +1,58 @@
+﻿@using Entities;
+@model ICollection<Person>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>People</h2>
+<table class="table_blur" style="margin: auto;">
+    <tr id="headertable">
+        <th>ID</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Birthday</th>
+        <th>Age</th>
+        <th>Awards</th>
+        <th>Action</th>
+    </tr>
+    @{
+        string str ;
+        foreach (Person person in Model)
+        {
+            str = "";
+            foreach (Award award in person.GetAwards())
+            {
+                str += award.Name+"; ";
+
+            }
+
+
+            if (String.IsNullOrEmpty(str)) { str = "none"; }
+            else { str = str.Substring(0, str.Length-2)+"." ;}
+            <tr>
+                <td>@person.ID.ToString()</td>
+                <td>@person.FirstName</td>
+                <td>@person.LastName</td>
+                <td>@person.DateBirth.ToString("dd.MM.yyyy")</td>
+                <td>@person.Age.ToString()</td>
+                <td>@str</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new 
+                        { 
+                             ID = person.ID, 
+                             FirstName = person.FirstName, 
+                             LastName = person.LastName, 
+                             DateBirth = person.DateBirth 
+                        }) 
+
+                    @Html.ActionLink("Delete", "Delete", new { id = person.ID })
+                </td>
+
+            </tr>
+        }
+    }
+
+</table>
+<button id="butcreate">@Html.ActionLink("Create person","Add","People")</button>
+
